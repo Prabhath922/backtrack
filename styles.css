@@ -1,0 +1,10 @@
+.email-highlight {
+    background-color: yellow;
+    padding: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .email-highlight:hover {
+    background-color: #ffeb3b;
+  }

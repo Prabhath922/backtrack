@@ -1,17 +1,21 @@
 {
-    "manifest_version": 3,
-    "name": "Email Detector",
-    "version": "1.0",
-    "description": "Detects email addresses on a webpage and allows sending emails",
-    "permissions": ["scripting", "activeTab"],
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ]
+  "manifest_version": 3,
+  "name": "Email Highlighter",
+  "version": "1.0",
+  "description": "Highlights email addresses on web pages and allows sending emails",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Email Highlighter"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
   }
-  
+}

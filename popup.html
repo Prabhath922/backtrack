@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Email Detector</title>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 300px;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+    }
+    h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      margin: 10px 0;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #email-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .email-item {
+      margin: 5px 0;
+      padding: 5px;
+      border-radius: 3px;
+    }
+    .email-item:hover {
+      background-color: #f5f5f5;
+    }
+    .no-emails {
+      color: #7f8c8d;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-  <h3>Detected Emails</h3>
-  <ul id="email-list"></ul>
+  <h3>Email Highlighter</h3>
+  <div id="status"></div>
+  <div id="email-list"></div>
+  <button id="highlight-btn">Highlight Emails</button>
+  <button id="send-btn">Send Selected Emails</button>
+  
   <script src="popup.js"></script>
 </body>
 </html>
