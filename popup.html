@@ -2,58 +2,65 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <style>
-    body {
-      width: 300px;
-      padding: 15px;
-      font-family: Arial, sans-serif;
-    }
-    h3 {
-      margin-top: 0;
-      color: #2c3e50;
-    }
-    button {
-      background-color: #3498db;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
-      margin: 10px 0;
-    }
-    button:hover {
-      background-color: #2980b9;
-    }
-    #email-list {
-      max-height: 200px;
-      overflow-y: auto;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 4px;
-    }
-    .email-item {
-      margin: 5px 0;
-      padding: 5px;
-      border-radius: 3px;
-    }
-    .email-item:hover {
-      background-color: #f5f5f5;
-    }
-    .no-emails {
-      color: #7f8c8d;
-      font-style: italic;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h3>Email Highlighter</h3>
-  <div id="status"></div>
-  <div id="email-list"></div>
-  <button id="highlight-btn">Highlight Emails</button>
-  <button id="send-btn">Send Selected Emails</button>
+  <div class="header">
+    <h3>Recruiter Email Assistant</h3>
+  </div>
   
+  <div class="container">
+    <div class="status scanning" id="status">
+      <div class="status-icon"></div>
+      <span id="status-text">Scanning page for emails...</span>
+    </div>
+    
+    <div id="email-list">
+      <div class="no-emails">fetching emails</div>
+    </div>
+    
+    <div class="button-group">
+      <button class="primary-btn" id="highlight-btn">
+        <!-- SVG icon code -->
+        Highlight Emails
+      </button>
+      
+      <div class="button-row">
+        <button class="secondary-btn" id="processing-btn">
+          <!-- SVG icon code -->
+          Processing
+        </button>
+        
+        <button class="tertiary-btn" id="rejected-btn">
+          <!-- SVG icon code -->
+          Rejected
+        </button>
+      </div>
+      <button class="success-btn" id="accepted-btn">
+        <!-- SVG icon code -->
+        Accepted
+      </button>
+      
+      <button class="quaternary-btn" id="underreview-btn">
+        <!-- SVG icon code -->
+        Under Review
+      </button>
+    </div>
+    
+    <div class="template-section">
+      <h4>Selected Template:</h4>
+      <textarea id="email-template" placeholder="Email template will appear here..."></textarea>
+      <button class="primary-btn" id="send-btn">
+        <!-- SVG icon code -->
+        Send Selected Emails
+      </button>
+    </div>
+    
+    <div class="footer">
+      <p>Recruiter Email Assistant v1.0</p>
+    </div>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>

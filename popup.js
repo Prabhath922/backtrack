@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
   const emailList = document.getElementById('email-list');
   const highlightBtn = document.getElementById('highlight-btn');
   const sendBtn = document.getElementById('send-btn');
+  const processingBtn = document.getElementById('processing-btn');
+  const rejectedBtn = document.getElementById('rejected-btn');
+  const underreviewBtn = document.getElementById('underreview-btn');
+  
+  // Email templates
+  const emailTemplates = {
+    processing: "Dear Candidate,\n\nThank you for your application. We are currently processing your application and will update you on the status shortly.\n\nBest regards,\nRecruitment Team",
+    rejected: "Dear Candidate,\n\nAfter careful consideration, we regret to inform you that your application has not been successful at this time.\n\nWe appreciate your interest in our company and encourage you to apply for future positions that match your skills and experience.\n\nBest regards,\nRecruitment Team",
+    underreview: "Dear Candidate,\n\nWe are writing to inform you that your application is currently under review by our hiring team.\n\nWe will contact you as soon as a decision has been made. This process typically takes 7-10 business days.\n\nBest regards,\nRecruitment Team"
+  };
+  
+  let currentTemplate = emailTemplates.processing;
   
   // Get the current active tab
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -48,7 +60,26 @@ document.addEventListener('DOMContentLoaded', function() {
   highlightBtn.addEventListener('click', function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {action: "highlightEmails"});
+      statusDiv.textContent = "Emails highlighted on page";
     });
+  });
+  
+  // Processing application button
+  processingBtn.addEventListener('click', function() {
+    currentTemplate = emailTemplates.processing;
+    statusDiv.textContent = "Processing application template selected";
+  });
+  
+  // Rejected email button
+  rejectedBtn.addEventListener('click', function() {
+    currentTemplate = emailTemplates.rejected;
+    statusDiv.textContent = "Rejection email template selected";
+  });
+  
+  // Under review email button
+  underreviewBtn.addEventListener('click', function() {
+    currentTemplate = emailTemplates.underreview;
+    statusDiv.textContent = "Under review email template selected";
   });
   
   // Send emails button
@@ -59,8 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     if (selectedEmails.length > 0) {
-      // Open default email client with selected emails
-      const mailtoLink = `mailto:${selectedEmails.join(',')}`;
+      // Encode the template for use in mailto link
+      const encodedTemplate = encodeURIComponent(currentTemplate);
+      
+      // Open default email client with selected emails and template
+      const mailtoLink = `mailto:${selectedEmails.join(',')}?body=${encodedTemplate}`;
       window.open(mailtoLink);
     } else {
       alert('Please select at least one email address.');
